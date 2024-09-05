@@ -10,6 +10,10 @@ interface IProps {
   uuid: string;
 }
 
+function replaceNewlinesWithBr(text: string) {
+  return text.replace(/\n/g, '<br>');
+}
+
 export function ConversationDisplay({ uuid }: IProps) {
   const { conversation, setConversation, isGenerating, setIsGenerating } =
     useConversation();
@@ -68,7 +72,9 @@ export function ConversationDisplay({ uuid }: IProps) {
               <MdOutlineComputer />
             </div>
           )}
-          <pre key={message.content}>{message.content}</pre>
+          <div key={message.content}>
+            {replaceNewlinesWithBr(message.content)}
+          </div>
         </div>
       ))}
     </div>
